@@ -11,7 +11,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,28 +45,34 @@ public class GreetingService {
     }
 
     public List<GreetingJSON> listAllGreetings() {
+        if (greetingJSONList == null || greetingJSONList.isEmpty()) {
+            greetingJSONList = getGreetings();
+        }
         return greetingJSONList;
     }
 
     private List<GreetingJSON> getGreetings() {
-            return CQRSService.listAllGreetings().stream().map(greetingDTO -> {
-                return new GreetingJSON(greetingDTO.text(), greetingDTO.author());
-            }).collect(Collectors.toList());
+
+        return CQRSService.listAllGreetings().stream().map(greetingDTO -> {
+            return new GreetingJSON(greetingDTO.text(), greetingDTO.author());
+        }).collect(Collectors.toList());
     }
 
     @PostConstruct
     void setUp() {
+
         greetingJSONList = getGreetings();
         LOGGER.debug("greetingJSONList hydrated");
     }
 
     @Scheduled(every="2m")
     void refreshGreetingJSONList() {
+
         greetingJSONList.addAll(getGreetings());
     }
 
-
     public GreetingJSON randomGreeting() {
+
         return greetingJSONList.get(new Random().nextInt(greetingJSONList.size()));
     }
 }
