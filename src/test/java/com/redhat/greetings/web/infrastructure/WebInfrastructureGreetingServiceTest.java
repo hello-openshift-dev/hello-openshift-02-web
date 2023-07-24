@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@QuarkusTest @TestProfile(WebTestProfile.class)
+@QuarkusTest @TestProfile(WebInfrastructureGreetingServiceTestProfile.class)
 public class WebInfrastructureGreetingServiceTest {
 
     static final Logger LOGGER = LoggerFactory.getLogger(WebInfrastructureGreetingServiceTest.class);

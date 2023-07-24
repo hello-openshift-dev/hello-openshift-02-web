@@ -19,7 +19,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
-@TestProfile(WebTestProfile.class)
+@TestProfile(WebInfrastructureGreetingServiceRandomGreetingTestProfile.class)
 public class WebInfrastructureGreetingServiceRandomGreetingTest {
 
     static final Logger LOGGER = LoggerFactory.getLogger(WebInfrastructureGreetingServiceRandomGreetingTest.class);
