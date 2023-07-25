@@ -27,7 +27,8 @@ public class RESTApiTest {
                 .request("POST", "/greeting")
                 .then()
                 .statusCode(202);
-
     }
+
+
 
 }
