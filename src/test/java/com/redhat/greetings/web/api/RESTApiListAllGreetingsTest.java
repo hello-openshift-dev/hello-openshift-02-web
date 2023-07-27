@@ -1,6 +1,8 @@
-package com.redhat.greetings.web.infrastructure;
+package com.redhat.greetings.web.api;
 
-import com.redhat.greetings.web.domain.GreetingJSON;
+import com.redhat.greetings.web.domain.GreetingSubmission;
+import com.redhat.greetings.web.domain.SourceSystem;
+import com.redhat.greetings.web.infrastructure.GreetingService;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.InjectMock;
 import io.restassured.path.json.JsonPath;
@@ -10,17 +12,17 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Instant;
 import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
-public class GreetingResourceTest {
+public class RESTApiListAllGreetingsTest {
 
-    static final Logger LOGGER = LoggerFactory.getLogger(GreetingResourceTest.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(RESTApiListAllGreetingsTest.class);
 
     @InjectMock
     GreetingService greetingService;
@@ -31,24 +33,15 @@ public class GreetingResourceTest {
 
     @BeforeEach
     void setUp() {
-        Mockito.when(greetingService.listAllGreetings()).thenReturn(Arrays.asList(new GreetingJSON(text, author)));
-        Mockito.when(greetingService.randomGreeting()).thenReturn(new GreetingJSON(text, author));
+        Mockito.when(greetingService.listAllSubmissions()).thenReturn(Arrays.asList(new GreetingSubmission(text, author, SourceSystem.REST_API, Instant.now())));
     }
 
     @Test
     public void testAllGreetings() {
-        JsonPath jsonpath = when().get("/greeting/all").jsonPath();
+
+        JsonPath jsonpath = when().get("/greetings").jsonPath();
         String resultingText= jsonpath.getString("text[0]");
         assertEquals(text, resultingText);
     }
 
-    @Test
-    public void testRandomGreeting() {
-
-        given()
-                .when().get("/greeting")
-                .then()
-                .statusCode(200)
-                .body(containsString("text"));
-    }
 }

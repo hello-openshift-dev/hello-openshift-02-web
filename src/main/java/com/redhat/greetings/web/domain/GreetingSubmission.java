@@ -36,4 +36,23 @@ public class GreetingSubmission extends PanacheEntity {
     public GreetingDTO toDTO() {
         return new GreetingDTO(this.text, this.author, this.sourceSystem);
     }
+
+    public Long getId() {
+        return id;
+    }
+    public String getText() {
+        return text;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public SourceSystem getSourceSystem() {
+        return sourceSystem;
+    }
+
+    public Instant getSubmittedAt() {
+        return submittedAt;
+    }
 }

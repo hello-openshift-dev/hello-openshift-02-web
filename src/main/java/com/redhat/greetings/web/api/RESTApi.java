@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-@Path("/greeting")
+@Path("/greetings")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class RESTApi {
@@ -25,7 +25,7 @@ public class RESTApi {
 
     @POST
     @Transactional
-    public Response addGreeting(GreetingJSON greetingJSON) {
+    public Response submitGreeting(GreetingJSON greetingJSON) {
 
         LOGGER.debug("adding Greeting: {}", greetingJSON);
         greetingService.processGreetingSubmission(greetingJSON);
@@ -33,24 +33,10 @@ public class RESTApi {
     }
 
     @GET
-    @Path("/all")
-    public Response allGreetings(){
+    public Response allSubmittedGreetings(){
 
-        return Response.ok().entity(greetingService.listAllGreetings()).build();
-    }
-
-    @GET
-    public Response hello() {
-
-        return Response.ok().entity(greetingService.randomGreeting()).build();
-    }
-
-    @GET
-    @Path("/submissions")
-    public Response allSubmissions() {
-
-        List<GreetingSubmission> all = GreetingSubmission.listAll();
-        return Response.ok().entity(all).build();
+        LOGGER.debug("GreetingSubmissions: {}", greetingService.listAllSubmissions());
+        return Response.ok().entity(greetingService.listAllSubmissions()).build();
     }
 
 }
