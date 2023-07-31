@@ -80,8 +80,8 @@ public class GreetingService {
     @PostConstruct
     void setUp() {
 
-        greetingJSONList = getGreetings();
-        LOGGER.debug("greetingJSONList hydrated");
+//        greetingJSONList = getGreetings();
+//        LOGGER.debug("greetingJSONList hydrated");
     }
 
     @Scheduled(every="2m")
