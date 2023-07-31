@@ -67,7 +67,7 @@
             width: 80%;
             height: 500px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft box shadow */
-            transition: all .3s ease-in; /* Be sure to update TIMEOUT to match */
+            transition: all .3s ease; /* Be sure to update TIMEOUT to match */
         }
 
 
@@ -148,14 +148,14 @@
     <main>
         <div id="form-container">
             <h2 id="feedbackFormTitle">Feedback Form</h1>
-            <form onsubmit="handleSubmit(event)" id="feedbackForm">
-                <label for="name">Name:</label>
-                <input type="text" id="nameInput" name="name" required>
+            <form onsubmit="handleSubmit(event)" id="feedbackForm" aria-label="Feedback Form">
+                <label for="nameInput">Name:</label>
+                <input type="text" id="nameInput" name="feedback-form" required autofocus>
                 
-                <label for="feedback">Feedback:</label>
-                <textarea id="feedbackInput" name="feedback" rows="4" required></textarea>
+                <label for="feedbackInput">Feedback:</label>
+                <textarea id="feedbackInput" name="feedback-form" rows="4" required></textarea>
                 
-                <button type="submit">Submit</button>
+                <button type="submit" id="submitBtn">Submit</button>
             </form>
             <aside class="thank-you" id="thankYouMessage">
                 <p>Thank you for your feedback!</p>
@@ -163,30 +163,39 @@
             </aside>
         </div>
     </main>
-    <footer>Brought to you be Red Hat</footer>
+    <footer>Brought to you by <a style="padding-left: 5px;font-weight: 800" href="https://www.redhat.com"> Red Hat </a></footer>
 </body>
 </html>
 <script>
     const formContainer = document.getElementById("form-container");
     const feedbackFormTitle = document.getElementById("feedbackFormTitle");
     const feedbackForm = document.getElementById("feedbackForm");
+    const nameInput = document.getElementById("nameInput");
+    const feedbackInput = document.getElementById("feedbackInput");
     const thankYouMessage = document.getElementById("thankYouMessage");
+    const submitBtn = document.getElementById("submitBtn");
     const resetBtn = document.getElementById("resetBtn");
     const TIMEOUT = 300;
 
     resetBtn.addEventListener("click", function() {
         formContainer.classList.remove("small");
         thankYouMessage.style.display = "none";
-        setTimeout(function() {
-            feedbackFormTitle.style.display = "block";
-            feedbackForm.style.display = "block";
-        }, TIMEOUT);
-
         // Reset form inputs
         nameInput.value = "";
         feedbackInput.value = "";
+        // Timeout for remaining elements to CSS correctly
+        setTimeout(function() {
+            feedbackFormTitle.style.display = "block";
+            feedbackForm.style.display = "block";
+            nameInput.focus();
+        }, TIMEOUT);
     });
 
+    feedbackInput.addEventListener("keypress", function(e) {
+        if (e.keyCode === 13) {
+            submitBtn.click();
+        }
+    })
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -194,7 +203,7 @@
         const form = event.target;
         const data = new FormData(form);
         
-        fetch('/greeting', {
+        fetch('/greetings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -224,8 +233,10 @@
         feedbackFormTitle.style.display = "none";
         feedbackForm.style.display = "none";
         formContainer.classList.add("small");
+        // Timeout for remaining elements to CSS correctly
         setTimeout(function() {
             thankYouMessage.style.display = "block";
+            resetBtn.focus();
         }, TIMEOUT);
     }
 </script>
