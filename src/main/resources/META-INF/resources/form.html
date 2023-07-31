@@ -1,231 +1,231 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Feedback Form</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,800&family=Press+Start+2P&display=swap');
-    :root {
-      --hello-red: #d12c34;
-    }
-    * { box-sizing: border-box; }
-    body {
-      background: #f1f1f9;
-      font-family: 'Open Sans', sans-serif;
-      color: #333;
-      margin: 0;
-    }
+    <title>Feedback Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,800&family=Press+Start+2P&display=swap');
+        :root {
+            --hello-red: #d12c34;
+        }
+        * { box-sizing: border-box; }
+        body {
+            background: #f1f1f9;            
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            margin: 0;
+        }
 
-    main {
-      align-items: center;
-      display: flex;
-      flex-flow: column;
-      height: calc(100vh - 30px);
-      justify-content: center;
-    }
+        main {
+            align-items: center;
+            display: flex;
+            flex-flow: column;
+            height: calc(100vh - 30px);
+            justify-content: center;
+        }
 
-    footer {
-      height: 30px;
-      background-color: var(--hello-red);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff
-    }
+        footer {
+            height: 30px;
+            background-color: var(--hello-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff
+        }
+        
+        a { text-decoration: none; color: inherit; }
+        
+        h1 {
+            font-family: 'Arial';
+        }
 
-    a { text-decoration: none; color: inherit; }
+        h2 { 
+            font-weight: 600;
+        }
 
-    h1 {
-      font-family: 'Arial';
-    }
-
-    h2 {
-      font-weight: 600;
-    }
-
-    #back-button {
-      font-family: 'Press Start 2P';
-      color: #fff;
-    }
-
-    #menu-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: var(--hello-red);
-      padding: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    #form-container {
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 60px;
-      border-radius: 20px;
-      max-width: 750px;
-      width: 80%;
-      height: 500px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft box shadow */
-      transition: all .3s ease-in; /* Be sure to update TIMEOUT to match */
-    }
+        #back-button {
+            font-family: 'Press Start 2P';
+            color: #fff;
+        }
+        
+        #menu-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--hello-red);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        #form-container {
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 20px;
+            max-width: 750px;
+            width: 80%;
+            height: 500px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+            transition: all .3s ease-in; /* Be sure to update TIMEOUT to match */
+        }
 
 
-    #form-container.small {
-      width: 350px;
-      height: 240px;
-    }
+        #form-container.small {
+            width: 350px;
+            height: 240px;
+        }
+        
+        textarea,
+        input[type="text"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #fff;
+            cursor: pointer;
+            &:hover {
+                background-color: var(--hello-red);
+                color: #fff;
+            }
+        }
 
-    textarea,
-    input[type="text"],
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 16px;
-    }
+        label {
+            font-family:'Courier New', Courier, monospace;
+        }
 
-    button {
-      background-color: #fff;
-      cursor: pointer;
-    &:hover {
-       background-color: var(--hello-red);
-       color: #fff;
-     }
-    }
+        #back-button {
+            font-size: 36px;
+            padding: 0 5px;
+        }
 
-    label {
-      font-family:'Courier New', Courier, monospace;
-    }
+        #page-title {
+            text-align: center;
+            color: #fff; /* White text color */
+            margin: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-    #back-button {
-      font-size: 36px;
-      padding: 0 5px;
-    }
-
-    #page-title {
-      text-align: center;
-      color: #fff; /* White text color */
-      margin: 0;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #redhat-logo {
-      background: #f1f1f9;
-      border-radius: 100px;
-      padding: 15px;
-    > img {
-      max-width: 35px;
-      transform: translate(0, 3px);
-    }
-    &:hover {
-       background: #fff;
-     }
-    }
-
-    .thank-you {
-      text-align: center;
-      font-weight: bold;
-      margin-top: 20px;
-      display: none;
-    }
-  </style>
+        #redhat-logo {
+            background: #f1f1f9;
+            border-radius: 100px;
+            padding: 15px;
+            > img {
+                max-width: 35px;
+                transform: translate(0, 3px);
+            }
+            &:hover {
+                background: #fff;
+            }
+        }
+        
+        .thank-you {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<div id="menu-bar">
-  <a href="/" id="back-button">&lt;</a>
-  <h1 id="page-title">
-    <span>HELLO</span>
-    <span style="font-size:14px">OpenShift</span>
-  </h1>
-  <a id="redhat-logo" href="https://developers.redhat.com/" target="_blank"><img src="./Logo-Red_Hat-Hat_icon-Standard-RGB.png" alt="Red Hat Icon" /></a>
-</div>
-<main>
-  <div id="form-container">
-    <h2 id="feedbackFormTitle">Feedback Form</h1>
-      <form onsubmit="handleSubmit(event)" id="feedbackForm">
-        <label for="name">Name:</label>
-        <input type="text" id="nameInput" name="name" required>
-
-        <label for="feedback">Feedback:</label>
-        <textarea id="feedbackInput" name="feedback" rows="4" required></textarea>
-
-        <button type="submit">Submit</button>
-      </form>
-      <aside class="thank-you" id="thankYouMessage">
-        <p>Thank you for your feedback!</p>
-        <button type="button" id="resetBtn">Submit more feedback</button>
-      </aside>
-  </div>
-</main>
-<footer>Brought to you be Red Hat</footer>
+    <div id="menu-bar">
+        <a href="/" id="back-button">&lt;</a>
+        <h1 id="page-title">
+            <span>HELLO</span>
+            <span style="font-size:14px">OpenShift</span>
+        </h1>
+        <a id="redhat-logo" href="https://developers.redhat.com/" target="_blank"><img src="./Logo-Red_Hat-Hat_icon-Standard-RGB.png" alt="Red Hat Icon" /></a>
+    </div>
+    <main>
+        <div id="form-container">
+            <h2 id="feedbackFormTitle">Feedback Form</h1>
+            <form onsubmit="handleSubmit(event)" id="feedbackForm">
+                <label for="name">Name:</label>
+                <input type="text" id="nameInput" name="name" required>
+                
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedbackInput" name="feedback" rows="4" required></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+            <aside class="thank-you" id="thankYouMessage">
+                <p>Thank you for your feedback!</p>
+                <button type="button" id="resetBtn">Submit more feedback</button>
+            </aside>
+        </div>
+    </main>
+    <footer>Brought to you be Red Hat</footer>
 </body>
 </html>
 <script>
-  const formContainer = document.getElementById("form-container");
-  const feedbackFormTitle = document.getElementById("feedbackFormTitle");
-  const feedbackForm = document.getElementById("feedbackForm");
-  const thankYouMessage = document.getElementById("thankYouMessage");
-  const resetBtn = document.getElementById("resetBtn");
-  const TIMEOUT = 300;
+    const formContainer = document.getElementById("form-container");
+    const feedbackFormTitle = document.getElementById("feedbackFormTitle");
+    const feedbackForm = document.getElementById("feedbackForm");
+    const thankYouMessage = document.getElementById("thankYouMessage");
+    const resetBtn = document.getElementById("resetBtn");
+    const TIMEOUT = 300;
 
-  resetBtn.addEventListener("click", function() {
-    formContainer.classList.remove("small");
-    thankYouMessage.style.display = "none";
-    setTimeout(function() {
-      feedbackFormTitle.style.display = "block";
-      feedbackForm.style.display = "block";
-    }, TIMEOUT);
+    resetBtn.addEventListener("click", function() {
+        formContainer.classList.remove("small");
+        thankYouMessage.style.display = "none";
+        setTimeout(function() {
+            feedbackFormTitle.style.display = "block";
+            feedbackForm.style.display = "block";
+        }, TIMEOUT);
 
-    // Reset form inputs
-    nameInput.value = "";
-    feedbackInput.value = "";
-  });
+        // Reset form inputs
+        nameInput.value = "";
+        feedbackInput.value = "";
+    });
 
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const form = event.target;
-    const data = new FormData(form);
-
-    fetch('/greeting', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        // Pass the form data as JSON
-        author: data.get('nameInput'),
-        text: data.get('feedbackInput'),
-      }),
-    })
-            .then(function (response) {
-              if (response.ok) {
+    function handleSubmit(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const data = new FormData(form);
+        
+        fetch('/greeting', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                // Pass the form data as JSON
+                author: data.get('nameInput'),
+                text: data.get('feedbackInput'),
+            }),
+        })
+        .then(function (response) {
+            if (response.ok) {
                 // Handle success response
                 displayThankYou();
-              } else {
+            } else {
                 // Handle error response
                 console.log('Error submitting form');
-              }
-            })
-            .catch(function (error) {
-              // Handle fetch error
-              console.log('An error occurred while submitting the form:', error);
-            });
-  }
-
-  function displayThankYou() {
-    feedbackFormTitle.style.display = "none";
-    feedbackForm.style.display = "none";
-    formContainer.classList.add("small");
-    setTimeout(function() {
-      thankYouMessage.style.display = "block";
-    }, TIMEOUT);
-  }
+            }
+        })
+        .catch(function (error) {
+            // Handle fetch error
+            console.log('An error occurred while submitting the form:', error);
+        });
+    }
+    
+    function displayThankYou() {
+        feedbackFormTitle.style.display = "none";
+        feedbackForm.style.display = "none";
+        formContainer.classList.add("small");
+        setTimeout(function() {
+            thankYouMessage.style.display = "block";
+        }, TIMEOUT);
+    }
 </script>
