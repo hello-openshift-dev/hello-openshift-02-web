@@ -1,6 +1,6 @@
 package com.redhat.greetings.web.domain;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
 import java.time.Instant;

@@ -3,8 +3,9 @@ package com.redhat.greetings.web.api;
 import com.redhat.greetings.web.domain.GreetingJSON;
 import com.redhat.greetings.web.domain.GreetingSubmission;
 import com.redhat.greetings.web.infrastructure.GreetingService;
+import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
+import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -24,19 +25,20 @@ public class RESTApi {
     GreetingService greetingService;
 
     @POST
-    @Transactional
-    public Response submitGreeting(GreetingJSON greetingJSON) {
+    @WithTransaction
+    public Uni<Response> submitGreeting(GreetingJSON greetingJSON) {
 
         LOGGER.debug("adding Greeting: {}", greetingJSON);
-        greetingService.processGreetingSubmission(greetingJSON);
-        return Response.accepted().build();
+        return greetingService.processGreetingSubmission(greetingJSON).map(g -> {
+            return Response.accepted().build();
+        });
     }
 
     @GET
-    public Response allSubmittedGreetings(){
+    @WithTransaction
+    public Uni<List<GreetingSubmission>> allSubmittedGreetings(){
 
-        LOGGER.debug("GreetingSubmissions: {}", greetingService.listAllSubmissions());
-        return Response.ok().entity(greetingService.listAllSubmissions()).build();
+        return greetingService.listAllSubmissions();
     }
 
 }

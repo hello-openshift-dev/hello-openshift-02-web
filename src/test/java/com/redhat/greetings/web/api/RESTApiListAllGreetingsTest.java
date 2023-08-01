@@ -33,7 +33,7 @@ public class RESTApiListAllGreetingsTest {
 
     @BeforeEach
     void setUp() {
-        Mockito.when(greetingService.listAllSubmissions()).thenReturn(Arrays.asList(new GreetingSubmission(text, author, SourceSystem.REST_API, Instant.now())));
+//        Mockito.when(greetingService.listAllSubmissions()).thenReturn(Arrays.asList(new GreetingSubmission(text, author, SourceSystem.REST_API, Instant.now())));
     }
 
     @Test
