@@ -6,6 +6,7 @@ import com.redhat.greetings.web.infrastructure.GreetingService;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.InjectMock;
 import io.restassured.path.json.JsonPath;
+import io.smallrye.mutiny.Uni;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,7 +34,7 @@ public class RESTApiListAllGreetingsTest {
 
     @BeforeEach
     void setUp() {
-//        Mockito.when(greetingService.listAllSubmissions()).thenReturn(Arrays.asList(new GreetingSubmission(text, author, SourceSystem.REST_API, Instant.now())));
+        Mockito.when(greetingService.listAllSubmissions()).thenReturn(Uni.createFrom().item(Arrays.asList(new GreetingSubmission(text, author, SourceSystem.REST_API, Instant.now()))));
     }
 
     @Test
